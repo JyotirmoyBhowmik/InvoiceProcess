@@ -1,0 +1,31 @@
+tax_matrix:
+  Traveling:
+    tax_code: "TX_TRV_18"
+    rate_percentage: 18.0
+    gl_account: "GL-610020"
+    cost_center: "CC-CORP-TRAVEL"
+    description: "Corporate Air & Ground Travel"
+  Medical:
+    tax_code: "TX_MED_EXEMPT"
+    rate_percentage: 0.0
+    gl_account: "GL-620010"
+    cost_center: "CC-HEALTH-HR"
+    description: "Staff Medical & Clinical Consultations"
+  Food:
+    tax_code: "TX_FNB_05"
+    rate_percentage: 5.0
+    gl_account: "GL-630040"
+    cost_center: "CC-ADMIN-HOSP"
+    description: "Employee Meals & Client Hospitality"
+  Cloud_Infrastructure:
+    tax_code: "TX_TECH_18"
+    rate_percentage: 18.0
+    gl_account: "GL-640050"
+    cost_center: "CC-ENG-INFRA"
+    description: "Hosting, Compute & Cloud API Infrastructure"
+  Default:
+    tax_code: "TX_GEN_13"
+    rate_percentage: 13.0
+    gl_account: "GL-699999"
+    cost_center: "CC-GEN-OVERHEAD"
+    description: "General Operating Expenses"
