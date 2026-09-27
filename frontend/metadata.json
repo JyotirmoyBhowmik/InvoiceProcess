@@ -1,0 +1,4 @@
+{
+  "name": "Extracto Enterprise - Python Invoice Pipeline & Orchestrator",
+  "description": "Production-ready enterprise invoice automation system: MS Graph API email ingestion, Vertex AI Agent Builder & Gemini extraction, dynamic rule engines, math reconciliations, CSV/Fixed-Width TXT exporters, and full interactive management console."
+}
