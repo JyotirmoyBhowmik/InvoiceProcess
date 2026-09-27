@@ -1,4 +1,4 @@
 {
-  "name": "Extracto Enterprise - Python Invoice Pipeline & Orchestrator",
-  "description": "Production-ready enterprise invoice automation system: MS Graph API email ingestion, Vertex AI Agent Builder & Gemini extraction, dynamic rule engines, math reconciliations, CSV/Fixed-Width TXT exporters, and full interactive management console."
+  "name": "Extracto Enterprise - Universal Mailbox, OCR & ERP Template Automation",
+  "description": "Production-grade enterprise invoice automation platform supporting multi-tenant mailboxes (MS Graph, EWS, IMAP, Gmail), Vertex AI Agent Builder & Gemini 2.5 Flash OCR, dynamic CSV/Fixed-Width ERP template mappers, accounting reconciliation, and administrative control panel."
 }
