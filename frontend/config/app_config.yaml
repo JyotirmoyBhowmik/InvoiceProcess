@@ -1,0 +1,146 @@
+system:
+  environment: "production"
+  log_level: "INFO"
+  trace_logging: true
+  rounding_tolerance: 0.05
+
+database:
+  # Supported dialects: "postgresql", "mysql"
+  dialect: "postgresql" # switch to "mysql" for MySQL 8.x / MariaDB
+  driver: "psycopg2"    # for postgresql: psycopg2; for mysql: pymysql
+  host: "${DB_HOST:-localhost}"
+  port: 5432            # 5432 for Postgres, 3306 for MySQL
+  database_name: "${DB_NAME:-invoice_erp_db}"
+  username: "${DB_USER:-postgres}"
+  password: "${DB_PASSWORD:-postgres_secure_pass}"
+  ssl_mode: "prefer"    # "disable", "require", "prefer"
+  pool_size: 10
+  max_overflow: 20
+  pool_timeout: 30
+  pool_recycle: 1800
+  echo_sql: false
+  auto_migrate: true
+  # Fallback to local config/vendors.json if database connection fails
+  fallback_to_json_vendors: true
+
+mailbox:
+  provider: "graph_api" # options: "graph_api", "imap"
+  tenant_id: "${AZURE_TENANT_ID}"
+  client_id: "${AZURE_CLIENT_ID}"
+  client_secret: "${AZURE_CLIENT_SECRET}"
+  target_mailbox: "finance-invoices@company.com"
+  folder: "Inbox"
+  filters:
+    allowed_senders:
+      - "*@makemytrip.com"
+      - "*@uber.com"
+      - "*@apollohospitals.com"
+      - "expenses@vendorportal.com"
+      - "*@nexusdynamics.io"
+    subject_keywords:
+      - "Invoice"
+      - "Bill"
+      - "Receipt"
+      - "E-Ticket"
+    max_age_days: 7
+    allowed_extensions:
+      - ".pdf"
+      - ".png"
+      - ".jpg"
+      - ".jpeg"
+      - ".tiff"
+    reject_file_patterns:
+      - "signature"
+      - "logo"
+      - "banner"
+      - "facebook"
+      - "linkedin"
+      - "twitter"
+
+agent_builder:
+  project_id: "${GCP_PROJECT_ID}"
+  location: "global" # or us-central1
+  data_store_id: "${AGENT_BUILDER_DATASTORE_ID}"
+  serving_config_id: "default_search"
+  max_output_tokens: 1024
+  temperature: 0.1
+  model_name: "gemini-2.5-flash"
+
+rules:
+  fixed_fields:
+    Company_Entity_Code: "CORP_HQ_01"
+    Default_Currency: "USD"
+    Accounting_System: "SAP_ECC"
+    Batch_ID_Prefix: "BATCH-INV"
+    ERP_Target: "SAP_FI_AP"
+  
+  expense_categories:
+    Traveling:
+      default_tax_code: "TX_TRV_18"
+      gl_account: "GL-610020"
+      cost_center: "CC-CORP-TRAVEL"
+    Medical:
+      default_tax_code: "TX_MED_EXEMPT"
+      gl_account: "GL-620010"
+      cost_center: "CC-HEALTH-HR"
+    Food:
+      default_tax_code: "TX_FNB_05"
+      gl_account: "GL-630040"
+      cost_center: "CC-ADMIN-HOSP"
+    Cloud_Infrastructure:
+      default_tax_code: "TX_TECH_18"
+      gl_account: "GL-640050"
+      cost_center: "CC-ENG-INFRA"
+    Default:
+      default_tax_code: "TX_GEN_13"
+      gl_account: "GL-699999"
+      cost_center: "CC-GEN-OVERHEAD"
+
+outputs:
+  csv:
+    enabled: true
+    output_dir: "./output/csv"
+    filename_template: "invoices_{batch_id}_{timestamp}.csv"
+    exceptions_filename: "exceptions_{batch_id}_{timestamp}.csv"
+    columns:
+      - "Company_Entity_Code"
+      - "Vendor_Code"
+      - "Invoice_Number"
+      - "Invoice_Date"
+      - "Due_Date"
+      - "Expense_Category"
+      - "Tax_Code"
+      - "GL_Account"
+      - "Cost_Center"
+      - "Subtotal"
+      - "Tax_Amount"
+      - "Total_Amount"
+      - "Currency"
+      - "Trace_ID"
+
+  txt:
+    enabled: true
+    output_dir: "./output/txt"
+    format: "pipe_delimited" # options: "pipe_delimited", "fixed_width"
+    delimiter: "|"
+    fixed_widths:
+      Company_Entity_Code: 12
+      Vendor_Code: 15
+      Invoice_Number: 20
+      Invoice_Date: 10
+      Expense_Category: 15
+      Tax_Code: 14
+      GL_Account: 12
+      Subtotal: 14
+      Tax_Amount: 14
+      Total_Amount: 14
+      Trace_ID: 36
+
+notifications:
+  enabled: true
+  provider: "graph_api" # options: "graph_api", "smtp"
+  sender_email: "notifications-finance@company.com"
+  recipient_emails:
+    - "finance-audit@company.com"
+  send_empty_reports: false
+  subject_template: "[INVOICE-PIPELINE] Processing Summary Batch {batch_id} - {status}"
