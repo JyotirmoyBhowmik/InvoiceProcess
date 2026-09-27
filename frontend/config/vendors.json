@@ -1,0 +1,76 @@
+{
+  "vendors": [
+    {
+      "vendor_code": "VEND_NEXUS_01",
+      "canonical_name": "Nexus Dynamics Cloud Corp",
+      "aliases": [
+        "Nexus Dynamics",
+        "Nexus Cloud Corp",
+        "Nexus Dynamics Cloud"
+      ],
+      "tax_ids": [
+        "US-EIN-884920194",
+        "EU940129841"
+      ],
+      "default_category": "Cloud_Infrastructure",
+      "default_payment_terms": "Net 30 Days"
+    },
+    {
+      "vendor_code": "VEND_MMT_09",
+      "canonical_name": "MakeMyTrip India Pvt Ltd",
+      "aliases": [
+        "MakeMyTrip",
+        "MMT Corporate",
+        "Make My Trip"
+      ],
+      "tax_ids": [
+        "07AABCM4567P1ZX"
+      ],
+      "default_category": "Traveling",
+      "default_payment_terms": "Immediate"
+    },
+    {
+      "vendor_code": "VEND_UBER_04",
+      "canonical_name": "Uber B.V. & Mobility Tech",
+      "aliases": [
+        "Uber",
+        "Uber Technologies",
+        "Uber BV",
+        "Uber India Systems"
+      ],
+      "tax_ids": [
+        "NL852071589B01",
+        "27AAACU1234F1ZV"
+      ],
+      "default_category": "Traveling",
+      "default_payment_terms": "Prepaid"
+    },
+    {
+      "vendor_code": "VEND_APOLLO_02",
+      "canonical_name": "Apollo Hospitals Enterprises Ltd",
+      "aliases": [
+        "Apollo Hospital",
+        "Apollo Pharmacy",
+        "Apollo Clinics"
+      ],
+      "tax_ids": [
+        "33AAAAC1234D1ZF"
+      ],
+      "default_category": "Medical",
+      "default_payment_terms": "Due Upon Receipt"
+    },
+    {
+      "vendor_code": "VEND_QUANTUM_07",
+      "canonical_name": "Quantum Leap Systems LLC",
+      "aliases": [
+        "Quantum Leap",
+        "Quantum Leap Tech"
+      ],
+      "tax_ids": [
+        "US-EIN-992144812"
+      ],
+      "default_category": "Cloud_Infrastructure",
+      "default_payment_terms": "Net 30 Days"
+    }
+  ]
+}
