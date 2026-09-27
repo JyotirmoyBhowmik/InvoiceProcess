@@ -1,5 +1,5 @@
 {
-  "name": "extracto-enterprise-python-invoice-pipeline-orchestrator",
+  "name": "extracto-enterprise-universal-mailbox-ocr-erp-template-automation",
   "workspaces": ["frontend", "backend"], 
   "scripts": {
     "dev-frontend": "npm run dev --prefix frontend",
